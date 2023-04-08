@@ -12,7 +12,7 @@ import com.example.doit.Models.Note
 interface NoteDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun inserty(note: Note)
+    suspend fun insert(note: Note)
 
     @Delete
     suspend fun delete(note: Note)
