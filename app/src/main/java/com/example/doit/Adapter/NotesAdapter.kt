@@ -37,6 +37,12 @@ class NotesAdapter(private val context: Context) :
         holder.date.text = currentNote.date
         holder.date.isSelected = true
 
+        holder.notes_layout.setCardBackgroundColor(
+            holder.itemView.resources.getColor(
+                randomColor(),
+                null
+            )
+        )
     }
 
     fun randomColor(): Int {
