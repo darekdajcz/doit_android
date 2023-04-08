@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.doit.Models.Note
 import com.example.doit.databinding.ActivityAddNoteBinding
-import com.example.doit.databinding.ActivityMainBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
