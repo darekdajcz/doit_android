@@ -1,5 +1,6 @@
 package com.example.doit.Adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +13,10 @@ import com.example.doit.R
 import java.util.*
 import kotlin.collections.ArrayList
 
-class NotesAdapter(private val context: Context) :
+class NotesAdapter(private val context: Context, val listner: NotesClickListner) :
     RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
-    private val NotesList: ArrayList<Note>()
-    private val fullList: ArrayList<Note>()
+    private val NotesList = ArrayList<Note>()
+    private val fullList = ArrayList<Note>()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
@@ -26,6 +27,28 @@ class NotesAdapter(private val context: Context) :
 
     override fun getItemCount(): Int {
         return NotesList.size
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(newList: List<Note>) {
+        fullList.clear()
+        fullList.addAll(newList)
+        NotesList.clear()
+        NotesList.addAll(fullList)
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun filterList(search: String) {
+        NotesList.clear()
+        for (item in fullList) {
+            if (item.title?.lowercase()?.contains(search.lowercase()) == true ||
+                item.note?.lowercase()?.contains(search.lowercase()) == true
+            ) {
+                NotesList.add(item)
+            }
+        }
+        notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
@@ -43,6 +66,15 @@ class NotesAdapter(private val context: Context) :
                 null
             )
         )
+
+        holder.notes_layout.setOnClickListener {
+            listner.onItemClicked(NotesList[holder.adapterPosition])
+        }
+
+        holder.notes_layout.setOnLongClickListener {
+            listner.onLongItemClicked(NotesList[holder.adapterPosition], holder.notes_layout)
+            true
+        }
     }
 
     fun randomColor(): Int {
@@ -65,5 +97,10 @@ class NotesAdapter(private val context: Context) :
         val title = itemView.findViewById<TextView>(R.id.tv_title)
         val note = itemView.findViewById<TextView>(R.id.tv_note)
         val date = itemView.findViewById<TextView>(R.id.tv_date)
+    }
+
+    interface NotesClickListner {
+        fun onItemClicked(note: Note)
+        fun onLongItemClicked(note: Note, cardView: CardView)
     }
 }
