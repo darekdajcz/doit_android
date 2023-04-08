@@ -9,6 +9,8 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.doit.Models.Note
 import com.example.doit.R
+import java.util.*
+import kotlin.collections.ArrayList
 
 class NotesAdapter(private val context: Context) :
     RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
@@ -34,6 +36,21 @@ class NotesAdapter(private val context: Context) :
         holder.note.text = currentNote.note
         holder.date.text = currentNote.date
         holder.date.isSelected = true
+
+    }
+
+    fun randomColor(): Int {
+        val list = ArrayList<Int>()
+        list.add(R.color.NoteColor1)
+        list.add(R.color.NoteColor2)
+        list.add(R.color.NoteColor3)
+        list.add(R.color.NoteColor4)
+        list.add(R.color.NoteColor5)
+        list.add(R.color.NoteColor6)
+
+        val seed = System.currentTimeMillis().toLong()
+        val randomIndex = Random(seed).nextInt(list.size)
+        return list[randomIndex]
 
     }
 
