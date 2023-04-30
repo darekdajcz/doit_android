@@ -1,9 +1,11 @@
 package com.example.doit
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.example.doit.Models.Note
 import com.example.doit.databinding.ActivityAddNoteBinding
@@ -16,18 +18,43 @@ class AddNote : AppCompatActivity() {
     private lateinit var note: Note
     private lateinit var old_note: Note
     var isUpdate = false
+    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityAddNoteBinding.inflate(layoutInflater)
         setContentView(binding.root)
         try {
-            old_note = intent.getSerializableExtra("current_note") as Note
-            binding.etTitle.setText(old_note.title)
-            binding.etNote.setText(old_note.note)
+            val oldNote = null
+            if(intent?.getSerializableExtra("current_note") != null) {
+                old_note = intent?.getSerializableExtra("current_note") as Note
+            }
+
+            if(old_note != null) {
+                println("xD")
+                binding.etTitle.setText(old_note.title)
+                binding.etNote.setText(old_note.note)
+                binding.etDate.setText(old_note.date)
+                binding.etNote.isEnabled = false
+                binding.etNote.isFocusable = false
+                binding.etNote.isFocusableInTouchMode = false
+                binding.etTitle.isEnabled = false
+                binding.etTitle.isFocusable = false
+                binding.etTitle.isFocusableInTouchMode = false
+            }
+
             isUpdate = true
         } catch (e: Exception) {
             e.printStackTrace()
+        }
+
+        binding.editButton.setOnClickListener {
+            binding.etNote.isEnabled = true
+            binding.etNote.isFocusable = true
+            binding.etNote.isFocusableInTouchMode = true
+            binding.etTitle.isEnabled = true
+            binding.etTitle.isFocusable = true
+            binding.etTitle.isFocusableInTouchMode = true
         }
 
         binding.imgCheck.setOnClickListener {
@@ -52,5 +79,13 @@ class AddNote : AppCompatActivity() {
                 Toast.makeText(this@AddNote, "Please enter some data", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    fun onShareButtonClick(view: View) {
+        val intent = Intent(Intent.ACTION_SEND)
+        val text = "Tytuł: " + binding.etTitle.text.toString() + "   Notatka: " +  binding.etNote.text.toString()
+        intent.type = "text/plain"
+        intent.putExtra(Intent.EXTRA_TEXT, text)
+        startActivity(Intent.createChooser(intent, "Udostępnij za pomocą"))
     }
 }

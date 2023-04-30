@@ -26,6 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
+                android:visibility="invisible"
                 app:srcCompat="@drawable/baseline_arrow_back_24" />
 
             <ImageView
@@ -62,14 +63,59 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="26dp"
-        android:ems="10"
-        android:hint="Start Typing"
-        android:lineSpacingMultiplier="1.8"
         android:background="@null"
+        android:ems="10"
         android:gravity="top"
+        android:hint="Start Typing"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:lineSpacingMultiplier="1.8"
+        app:layout_constraintBottom_toTopOf="@+id/et_date"
         app:layout_constraintEnd_toEndOf="@+id/et_title"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/et_title"
         app:layout_constraintTop_toBottomOf="@+id/et_title" />
+
+    <EditText
+        android:id="@+id/et_date"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="52dp"
+        android:background="@null"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="Start Typing"
+        android:inputType="textPersonName"
+        android:lineSpacingMultiplier="1.8"
+        android:enabled="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintBottom_toTopOf="@+id/edit_button"
+        app:layout_constraintEnd_toEndOf="@+id/et_title"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/et_title"
+        app:layout_constraintTop_toBottomOf="@+id/et_note" />
+
+    <Button
+        android:id="@+id/edit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Edytuj"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_note" />
+
+    <Button
+        android:id="@+id/share_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="172dp"
+        android:onClick="onShareButtonClick"
+        android:text="Udostępnij"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/edit_button"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -37,9 +37,10 @@ class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListner,
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
         initUI()
 
@@ -50,7 +51,10 @@ class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListner,
 
         viewModel.allNotes.observe(this) { list ->
             list?.let {
-                adapter.updateList(list)
+
+                val sortedList = list.sortedBy { it.title }
+
+                adapter.updateList(sortedList)
             }
         }
         database = NoteDatabase.getDatabase(this)
