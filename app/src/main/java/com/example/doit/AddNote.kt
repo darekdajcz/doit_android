@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.RadioButton
 import android.widget.Toast
 import com.example.doit.Models.Note
 import com.example.doit.databinding.ActivityAddNoteBinding
@@ -18,6 +19,7 @@ class AddNote : AppCompatActivity() {
     private lateinit var note: Note
     private lateinit var old_note: Note
     var isUpdate = false
+    var selectedImage = "";
     @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +33,6 @@ class AddNote : AppCompatActivity() {
             }
 
             if(old_note != null) {
-                println("xD")
                 binding.etTitle.setText(old_note.title)
                 binding.etNote.setText(old_note.note)
                 binding.etDate.setText(old_note.date)
@@ -57,18 +58,22 @@ class AddNote : AppCompatActivity() {
             binding.etTitle.isFocusableInTouchMode = true
         }
 
+        binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            val selectedOption = findViewById<RadioButton>(checkedId)
+            selectedImage = selectedOption.text as String
+        }
+
         binding.imgCheck.setOnClickListener {
             val title = binding.etTitle.text.toString()
             val note_desc = binding.etNote.text.toString()
 
             if (title.isNotEmpty() || note_desc.isNotEmpty()) {
-                val formatter = SimpleDateFormat("EEE, d MMM yyyy HH:mm a")
                 if (isUpdate) {
                     note = Note(
-                        old_note.id, title, note_desc, formatter.format(Date())
-                    )
+                        old_note.id, title, note_desc, selectedImage)
+
                 } else {
-                    note = Note(null, title, note_desc, formatter.format(Date()))
+                    note = Note(null, title, note_desc, selectedImage)
                 }
 
                 val intent = Intent()

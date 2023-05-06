@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
@@ -60,6 +61,34 @@ class NotesAdapter(private val context: Context, val listner: NotesClickListner)
         holder.date.text = currentNote.date
         holder.date.isSelected = true
 
+        if(holder.date.text == "androidX") {
+            holder.androidX.visibility = View.VISIBLE
+            holder.clockX.visibility = View.GONE
+            holder.arrowX.visibility = View.GONE
+            holder.starX.visibility = View.GONE
+        }
+
+        if(holder.date.text == "arrowX") {
+            holder.arrowX.visibility = View.VISIBLE
+            holder.clockX.visibility = View.GONE
+            holder.androidX.visibility = View.GONE
+            holder.starX.visibility = View.GONE
+        }
+
+        if(holder.date.text == "starX") {
+            holder.arrowX.visibility = View.GONE
+            holder.clockX.visibility = View.GONE
+            holder.androidX.visibility = View.GONE
+            holder.starX.visibility = View.VISIBLE
+        }
+
+        if(holder.date.text == "clockX") {
+            holder.arrowX.visibility = View.GONE
+            holder.androidX.visibility = View.GONE
+            holder.starX.visibility = View.GONE
+            holder.clockX.visibility = View.VISIBLE
+        }
+
         holder.notes_layout.setCardBackgroundColor(
             holder.itemView.resources.getColor(
                 randomColor(),
@@ -97,6 +126,10 @@ class NotesAdapter(private val context: Context, val listner: NotesClickListner)
         val title = itemView.findViewById<TextView>(R.id.tv_title)
         val note = itemView.findViewById<TextView>(R.id.tv_note)
         val date = itemView.findViewById<TextView>(R.id.tv_date)
+        val androidX = itemView.findViewById<ImageView>(R.id.androidX)
+        val arrowX = itemView.findViewById<ImageView>(R.id.arrowX)
+        val starX = itemView.findViewById<ImageView>(R.id.starX)
+        val clockX = itemView.findViewById<ImageView>(R.id.clockX)
     }
 
     interface NotesClickListner {

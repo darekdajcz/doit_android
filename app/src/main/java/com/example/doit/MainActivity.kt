@@ -1,5 +1,6 @@
 package com.example.doit
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,7 +8,6 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.LinearLayout
 import android.widget.PopupMenu
-import android.widget.SearchView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProvider
@@ -17,10 +17,12 @@ import com.example.doit.Database.NoteDatabase
 import com.example.doit.Models.Note
 import com.example.doit.Models.NoteViewModel
 import com.example.doit.databinding.ActivityMainBinding
+import com.example.doit.databinding.ListItemBinding
 
 class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListner,
     PopupMenu.OnMenuItemClickListener {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var listBinding: ListItemBinding
     private lateinit var database: NoteDatabase
     lateinit var viewModel: NoteViewModel
     lateinit var adapter: NotesAdapter
@@ -36,6 +38,7 @@ class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListner,
             }
         }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -55,10 +58,10 @@ class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListner,
                 val sortedList = list.sortedBy { it.title }
 
                 adapter.updateList(sortedList)
+                binding.textView.setText("Łącznie zadań: " + sortedList.size)
             }
         }
         database = NoteDatabase.getDatabase(this)
-
     }
 
     private fun initUI() {
@@ -82,18 +85,18 @@ class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListner,
             getContent.launch(intent)
         }
 
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText != null) {
-                    adapter.filterList(newText)
-                }
-                return true
-            }
-        })
+//        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                return false
+//            }
+//
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//                if (newText != null) {
+//                    adapter.filterList(newText)
+//                }
+//                return true
+//            }
+//        })
 
     }
 
