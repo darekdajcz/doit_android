@@ -49,11 +49,12 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:background="@null"
+        android:background="#9CC5AEEA"
         android:ems="10"
         android:hint="Title"
         android:inputType="textPersonName"
         android:textSize="26sp"
+        app:layout_constraintBottom_toTopOf="@+id/et_note"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/toolbar"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -61,17 +62,18 @@
     <EditText
         android:id="@+id/et_note"
         android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="26dp"
-        android:background="@null"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="#3BC5AEEA"
         android:ems="10"
         android:gravity="top"
         android:hint="Start Typing"
         android:inputType="textPersonName"
         android:lineSpacingMultiplier="1.8"
-        app:layout_constraintBottom_toTopOf="@+id/et_date"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="@+id/et_title"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/et_title"
         app:layout_constraintTop_toBottomOf="@+id/et_title" />
 
@@ -86,6 +88,7 @@
         android:focusableInTouchMode="false"
         android:gravity="top"
         android:hint="Start Typing"
+        android:visibility="gone"
         android:inputType="textPersonName"
         android:lineSpacingMultiplier="1.8"
         app:layout_constraintEnd_toEndOf="@+id/et_title"
@@ -116,46 +119,82 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="409dp"
         android:layout_height="350dp"
         android:layout_marginTop="1dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/edit_button"
         app:layout_constraintTop_toBottomOf="@+id/et_date"
-        tools:layout_editor_absoluteX="1dp">
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="2dp">
 
         <RadioGroup
             android:id="@+id/radioGroup"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="300dp"
+            tools:ignore="UselessParent"
             tools:layout_editor_absoluteX="-201dp"
-            tools:layout_editor_absoluteY="480dp"
-            tools:ignore="UselessParent">
+            tools:layout_editor_absoluteY="480dp">
+
+            <ImageView
+                android:id="@+id/imageView13"
+                android:layout_width="410dp"
+                android:layout_height="39dp"
+                android:background="#9CC5AEEA"
+                app:srcCompat="@drawable/ic_launcher_foreground" />
 
             <RadioButton
                 android:id="@+id/radioButton1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="androidX" />
+                android:background="#9CC5AEEA"
+                android:text="android" />
+
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#4BC5AEEA"
+                app:srcCompat="@drawable/baseline_arrow_back_24" />
 
             <RadioButton
                 android:id="@+id/radioButton2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="arrowX" />
+                android:background="#4BC5AEEA"
+                android:text="arrow" />
+
+            <ImageView
+                android:id="@+id/imageView15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#9CC5AEEA"
+                app:srcCompat="@android:drawable/btn_star_big_on" />
 
             <RadioButton
                 android:id="@+id/radioButton3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="starX" />
+                android:background="#9CC5AEEA"
+                android:text="star" />
+
+            <ImageView
+                android:id="@+id/imageView16"
+                android:layout_width="match_parent"
+                android:layout_height="26dp"
+                android:background="#4BC5AEEA"
+                app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
 
             <RadioButton
                 android:id="@+id/radioButton4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="clockX" />
+                android:background="#4BC5AEEA"
+                android:text="clock" />
+
         </RadioGroup>
+
     </LinearLayout>
 
 

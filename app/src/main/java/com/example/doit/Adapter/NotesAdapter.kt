@@ -61,28 +61,28 @@ class NotesAdapter(private val context: Context, val listner: NotesClickListner)
         holder.date.text = currentNote.date
         holder.date.isSelected = true
 
-        if(holder.date.text == "androidX") {
+        if(holder.date.text == "android") {
             holder.androidX.visibility = View.VISIBLE
             holder.clockX.visibility = View.GONE
             holder.arrowX.visibility = View.GONE
             holder.starX.visibility = View.GONE
         }
 
-        if(holder.date.text == "arrowX") {
+        if(holder.date.text == "arrow") {
             holder.arrowX.visibility = View.VISIBLE
             holder.clockX.visibility = View.GONE
             holder.androidX.visibility = View.GONE
             holder.starX.visibility = View.GONE
         }
 
-        if(holder.date.text == "starX") {
+        if(holder.date.text == "star") {
             holder.arrowX.visibility = View.GONE
             holder.clockX.visibility = View.GONE
             holder.androidX.visibility = View.GONE
             holder.starX.visibility = View.VISIBLE
         }
 
-        if(holder.date.text == "clockX") {
+        if(holder.date.text == "clock") {
             holder.arrowX.visibility = View.GONE
             holder.androidX.visibility = View.GONE
             holder.starX.visibility = View.GONE
